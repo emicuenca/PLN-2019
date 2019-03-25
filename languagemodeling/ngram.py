@@ -100,6 +100,22 @@ class NGram(LanguageModel):
         sent -- the sentence as a list of tokens.
         """
         # WORK HERE !!
+        n = self._n
+        cond_prob = 1.
+        
+        sent = sent + ['</s>']
+        if 1 < n:
+            sent = ['<s>'] + sent
+        
+        for i in range(len(sent) - n + 1):
+            token = sent[i + n - 1]
+            prev_tokens = tuple(sent[i:i+n-1])
+            cond_prob *= self.cond_prob(token, prev_tokens)
+            if cond_prob == 0.:
+                break
+
+        return cond_prob
+            
 
     def sent_log_prob(self, sent):
         """Log-probability of a sentence.
@@ -107,6 +123,24 @@ class NGram(LanguageModel):
         sent -- the sentence as a list of tokens.
         """
         # WORK HERE!!
+        n = self._n
+        log_prob = 0
+        
+        sent = sent + ['</s>']
+        if 1 < n:
+            sent = ['<s>'] + sent
+        
+        for i in range(len(sent) - n + 1):
+            token = sent[i + n - 1]
+            prev_tokens = tuple(sent[i:i+n-1])
+            cond_prob = self.cond_prob(token, prev_tokens)
+            if cond_prob == 0.:
+                log_prob = - math.inf
+                break
+            else:
+                log_prob += math.log2(cond_prob)
+        
+        return log_prob
 
 
 class AddOneNGram(NGram):
