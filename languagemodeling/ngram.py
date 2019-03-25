@@ -210,6 +210,23 @@ class InterpolatedNGram(NGram):
         print('Computing counts...')
         # WORK HERE!!
         # COMPUTE COUNTS FOR ALL K-GRAMS WITH K <= N
+        count = defaultdict(int)
+        
+        for sent in train_sents:
+            sent = sent + ['</s>']
+            count[()] += len(sent)
+            for k in range(1, n + 1):
+                # kgrams with at least one <s> symbol
+                for j in range(k):
+                    kgram = tuple(['<s>']* (k-j) + sent[:j])
+                    count[kgram] += 1
+                for i in range(len(sent) - k + 1):
+                    kgram = tuple(sent[i:i+k])
+                    count[kgram] += 1
+                    
+        self._count = dict(count)
+                    
+            
 
         # compute vocabulary size for add-one in the last step
         self._addone = addone
@@ -217,8 +234,11 @@ class InterpolatedNGram(NGram):
             print('Computing vocabulary...')
             self._voc = voc = set()
             # WORK HERE!!
+            for sent in train_sents:
+                for word in sent:
+                    voc.add(word)
 
-            self._V = len(voc)
+            self._V = len(voc) + 1
 
         # compute gamma if not given
         if gamma is not None:
@@ -227,6 +247,8 @@ class InterpolatedNGram(NGram):
             print('Computing gamma...')
             # WORK HERE!!
             # use grid search to choose gamma
+            # TODO
+            self._gamma = 1.
 
     def count(self, tokens):
         """Count for an k-gram for k <= n.
@@ -234,6 +256,7 @@ class InterpolatedNGram(NGram):
         tokens -- the k-gram tuple.
         """
         # WORK HERE!! (JUST A RETURN STATEMENT)
+        return self._count.get(tokens, 0)
 
     def cond_prob(self, token, prev_tokens=None):
         """Conditional probability of a token.
@@ -242,3 +265,37 @@ class InterpolatedNGram(NGram):
         prev_tokens -- the previous n-1 tokens (optional only if n = 1).
         """
         # WORK HERE!!
+        gamma = self._gamma
+        n = self._n
+        
+        if prev_tokens is None and n == 1:
+            prev_tokens = ()
+        
+        ngram = prev_tokens + (token,)
+        
+        prev_lambdas_factor = 1.
+        prob = 0
+        for i in range(len(ngram)):
+            
+            kgram = ngram[i:]
+            kminusonegram = kgram[:-1] 
+            k_count = self.count(kgram)
+            kminusone_count = self.count(kminusonegram)
+            
+            # For every k-gram with 1 < k
+            if 1 < len(kgram):
+                prob += prev_lambdas_factor * k_count / (kminusone_count + gamma)
+                curr_lamb = prev_lambdas_factor * kminusone_count / (kminusone_count + gamma)
+                prev_lambdas_factor -= curr_lamb
+            # For 1-grams with addone smoothing
+            elif len(kgram) == 1 and self._addone:
+                prob += prev_lambdas_factor * (k_count + 1) / (kminusone_count + self._V)
+            # For 1-grams without addone
+            else:
+                prob += prev_lambdas_factor * k_count / kminusone_count
+        
+        return prob
+
+
+
+
