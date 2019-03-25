@@ -86,6 +86,13 @@ class NGram(LanguageModel):
         prev_tokens -- the previous n-1 tokens (optional only if n = 1).
         """
         # WORK HERE!!
+        if prev_tokens is None:
+            w_n = (token,)
+            w_nminusone = ()
+        else:
+            w_n = prev_tokens + (token,)
+            w_nminusone = prev_tokens
+        return self.count(w_n) / self.count(w_nminusone)
 
     def sent_prob(self, sent):
         """Probability of a sentence. Warning: subject to underflow problems.
