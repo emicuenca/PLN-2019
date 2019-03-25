@@ -53,9 +53,24 @@ class NGram(LanguageModel):
 
         count = defaultdict(int)
 
-        # WORK HERE!!
-
+        for sent in sents:
+            sent = sent + ['</s>']
+            #if 1 < n:
+            #    sent = ['<s>'] + sent
+            for i in range(1, n):
+                ngram = tuple(['<s>'] * (n - i) + sent[:i])
+                nminusonegram = ngram[:n - 1]
+                print('A ver...', n, i, ngram, nminusonegram)
+                count[ngram] += 1
+                count[nminusonegram] += 1
+            for i in range(len(sent) - n + 1):
+                ngram = tuple(sent[i:i+n])
+                nminusonegram = tuple(sent[i:i+n-1])
+                count[ngram] += 1
+                count[nminusonegram] += 1
+            
         self._count = dict(count)
+        
 
     def count(self, tokens):
         """Count for an n-gram or (n-1)-gram.
