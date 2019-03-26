@@ -25,6 +25,12 @@ class LanguageModel(object):
         sents -- the sentences.
         """
         # WORK HERE!!
+        log_prob = 0
+        for sent in sents:
+            sent = sent + ['</s>']
+            log_prob += self.sent_log_prob(sent)
+
+        return log_prob
 
     def cross_entropy(self, sents):
         """Cross-entropy of a list of sentences.
@@ -32,6 +38,12 @@ class LanguageModel(object):
         sents -- the sentences.
         """
         # WORK HERE!!
+        m = len(sents)
+        for sent in sents:
+            m += len(sent)
+        cross_entropy = - self.log_prob(sents) / m
+
+        return cross_entropy
 
     def perplexity(self, sents):
         """Perplexity of a list of sentences.
@@ -39,6 +51,11 @@ class LanguageModel(object):
         sents -- the sentences.
         """
         # WORK HERE!!
+
+        cross_entropy = self.cross_entropy(sents)
+        perplexity = 2 ** cross_entropy
+
+        return perplexity
 
 
 class NGram(LanguageModel):
