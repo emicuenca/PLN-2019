@@ -77,7 +77,6 @@ class NGram(LanguageModel):
             for i in range(1, n):
                 ngram = tuple(['<s>'] * (n - i) + sent[:i])
                 nminusonegram = ngram[:n - 1]
-                print('A ver...', n, i, ngram, nminusonegram)
                 count[ngram] += 1
                 count[nminusonegram] += 1
             for i in range(len(sent) - n + 1):
@@ -119,11 +118,11 @@ class NGram(LanguageModel):
         # WORK HERE !!
         n = self._n
         cond_prob = 1.
-        
+
         sent = sent + ['</s>']
         if 1 < n:
             sent = ['<s>'] + sent
-        
+
         for i in range(len(sent) - n + 1):
             token = sent[i + n - 1]
             prev_tokens = tuple(sent[i:i+n-1])
@@ -132,7 +131,7 @@ class NGram(LanguageModel):
                 break
 
         return cond_prob
-            
+
 
     def sent_log_prob(self, sent):
         """Log-probability of a sentence.
@@ -160,7 +159,50 @@ class NGram(LanguageModel):
         return log_prob
 
 
-class AddOneNGram(NGram):
+class SmoothedNGram(LanguageModel):
+    @staticmethod
+    def ngramCount(sents, n):
+        print('Computing counts...')
+
+        count = defaultdict(int)
+        for sent in sents:
+            sent = sent + ['</s>']
+            count[()] += len(sent)
+            for k in range(1, n + 1):
+                # kgrams with at least one <s> symbol
+                for j in range(k):
+                    kgram = tuple(['<s>']* (k-j) + sent[:j])
+                    count[kgram] += 1
+                for i in range(len(sent) - k + 1):
+                    kgram = tuple(sent[i:i+k])
+                    count[kgram] += 1
+
+        return dict(count)
+    
+    @staticmethod
+    def vocabularySize(sents):
+        print('Computing vocabulary...')
+
+        voc = set()
+        voc.add('</s>')
+        for sent in sents:
+            for word in sent:
+                voc.add(word)
+
+        V = len(voc)
+
+        return V, voc
+    
+    @staticmethod
+    def splitData(sents, trainPercentage):
+        m = int(trainPercentage * len(sents))
+        train_sents = sents[:m]
+        held_out_sents = sents[m:]
+        
+        return train_sents, held_out_sents
+
+
+class AddOneNGram(NGram, SmoothedNGram):
 
     def __init__(self, n, sents):
         """
@@ -171,14 +213,7 @@ class AddOneNGram(NGram):
         super().__init__(n, sents)
 
         # compute vocabulary
-        self._voc = voc = set()
-        # WORK HERE!!
-        voc.add('</s>')
-        for sent in sents:
-            for word in sent:
-                voc.add(word)
-
-        self._V = len(voc)  # vocabulary size
+        self._V, self._voc = self.vocabularySize(sents)
 
     def V(self):
         """Size of the vocabulary.
@@ -202,7 +237,7 @@ class AddOneNGram(NGram):
         return (self.count(w_n) + 1) / (self.count(w_nminusone) + self.V())
 
 
-class InterpolatedNGram(NGram):
+class InterpolatedNGram(NGram, SmoothedNGram):
 
     def __init__(self, n, sents, gamma=None, addone=True):
         """
@@ -220,52 +255,32 @@ class InterpolatedNGram(NGram):
             train_sents = sents
         else:
             # 90% training, 10% held-out
-            m = int(0.9 * len(sents))
-            train_sents = sents[:m]
-            held_out_sents = sents[m:]
+            train_sents, held_out_sents = self.splitData(sents, .9)
 
-        print('Computing counts...')
         # WORK HERE!!
         # COMPUTE COUNTS FOR ALL K-GRAMS WITH K <= N
-        count = defaultdict(int)
-        
-        for sent in train_sents:
-            sent = sent + ['</s>']
-            count[()] += len(sent)
-            for k in range(1, n + 1):
-                # kgrams with at least one <s> symbol
-                for j in range(k):
-                    kgram = tuple(['<s>']* (k-j) + sent[:j])
-                    count[kgram] += 1
-                for i in range(len(sent) - k + 1):
-                    kgram = tuple(sent[i:i+k])
-                    count[kgram] += 1
                     
-        self._count = dict(count)
-                    
-            
+        self._count = self.ngramCount(train_sents, n)
 
         # compute vocabulary size for add-one in the last step
         self._addone = addone
         if addone:
-            print('Computing vocabulary...')
-            self._voc = voc = set()
-            # WORK HERE!!
-            for sent in train_sents:
-                for word in sent:
-                    voc.add(word)
-
-            self._V = len(voc) + 1
+            self._V, self._voc = self.vocabularySize(train_sents)
 
         # compute gamma if not given
         if gamma is not None:
             self._gamma = gamma
         else:
             print('Computing gamma...')
-            # WORK HERE!!
             # use grid search to choose gamma
-            # TODO
-            self._gamma = 1.
+            values = [1, 10, 100, 1000]
+            best = (-inf, values[0])
+            for value in values:
+                self._gamma = value
+                log_prob = self.log_prob(held_out_sents)
+                best = max(best, (log_prob, value))
+            self._gamma = best[1]
+            print("Gamma:", self._gamma)
 
     def count(self, tokens):
         """Count for an k-gram for k <= n.
@@ -314,5 +329,122 @@ class InterpolatedNGram(NGram):
         return prob
 
 
+class BackOffNGram(NGram, SmoothedNGram):
+    def __init__(self, n, sents, beta=None, addone=True):
+        """
+        Back-off NGram model with discounting as described by Michael Collins.
+ 
+        n -- order of the model.
+        sents -- list of sentences, each one being a list of tokens.
+        beta -- discounting hyper-parameter (if not given, estimate using
+            held-out data).
+        addone -- whether to use addone smoothing (default: True).
+        """
+        self._n = n
+        
+        if beta is not None:
+            # everything is training data
+            train_sents = sents
+        else:
+            # 90% training, 10% held-out
+            train_sents, held_out_sents = self.splitData(sents, .9)
+        
+        # compute kgram count for 0 <= k <= n
+        self._count = self.ngramCount(train_sents, n)
 
+        # compute vocabulary size for add-one in the last step
+        self._addone = addone
+        if addone:
+            self._V, self._voc = self.vocabularySize(train_sents)
+        
+        # precompute A
+        A = defaultdict(set)
+        for kgram in self._count:
+            if not kgram == ():
+                kminusonegram = kgram[:-1]
+                A[kminusonegram].add(kgram[-1])
+        self._A = dict(A)
+        
+        # compute beta if not given
+        if beta is None:
+            self._beta = 0.5
+            values = [0.1, 0.2, 0.3, 0.5, 0.7]
+            best = (-inf, values[0])
+            for value in values:
+                self._beta = value
+                log_prob = self.log_prob(held_out_sents)
+                best = max(best, (log_prob, value))
+            self._beta = best[1]
+            print("Beta:", self._beta)
+        else:
+            self._beta = beta
 
+    def A(self, tokens):
+        """Set of words with counts > 0 for a k-gram with 0 < k < n.
+ 
+        tokens -- the k-gram tuple.
+        """
+
+        return self._A.get(tokens, set())
+
+    def alpha(self, tokens):
+        """Missing probability mass for a k-gram with 0 < k < n.
+ 
+        tokens -- the k-gram tuple.
+        """
+        A = self.A(tokens)
+        beta = self._beta
+        
+        if 0 < len(A):
+            alpha = beta * len(A) / self.count(tokens)
+        else:
+            alpha = 1
+        
+        return alpha
+
+    def denom(self, tokens):
+        """Normalization factor for a k-gram with 0 < k < n.
+ 
+        tokens -- the k-gram tuple.
+        """
+        accum = 0
+        A = self.A(tokens)
+        beta = self._beta
+        tail = tokens[1:]
+        for x in A:
+            accum += self.count(tail + (x,)) - beta
+        if 0 < len(A):
+            accum /= self.count(tail)
+        denom = 1 - accum
+            
+        return denom
+
+    def cond_prob(self, token, prev_tokens=None):
+        """Conditional probability of a token.
+
+        token -- the token.
+        prev_tokens -- the previous n-1 tokens (optional only if n = 1).
+        """
+        if prev_tokens is None:
+            prev_tokens = ()
+        
+        beta = self._beta
+        prob = 1
+        A = self.A(prev_tokens)
+
+        while 0 < len(prev_tokens) and not token in A:
+            prob *= self.alpha(prev_tokens) / self.denom(prev_tokens)
+            prev_tokens = prev_tokens[1:]
+            A = self.A(prev_tokens)
+
+        if self._addone and len(prev_tokens) == 0:
+            prob *= self.count((token,)) + 1
+            prob /= self.count(prev_tokens) + self._V
+        else:
+            if len(prev_tokens) == 0:
+                prob *= self.count((token,))
+            else:
+                prob *= self.count(prev_tokens + (token,)) - beta
+            prob /= self.count(prev_tokens)
+
+        return prob
