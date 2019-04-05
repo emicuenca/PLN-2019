@@ -18,11 +18,19 @@ import pickle
 
 from nltk.corpus import gutenberg
 
-from languagemodeling.ngram import NGram
+from nltk.corpus.reader import PlaintextCorpusReader
+from nltk.data import find
+from nltk import RegexpTokenizer
+import os
+
+from languagemodeling.ngram import NGram, AddOneNGram, InterpolatedNGram, BackOffNGram
 
 
 models = {
     'ngram': NGram,
+    'addone': AddOneNGram,
+    'inter': InterpolatedNGram,
+    'backoff': BackOffNGram
 }
 
 
@@ -30,8 +38,11 @@ if __name__ == '__main__':
     opts = docopt(__doc__)
 
     # load the data
-    # WORK HERE!! LOAD YOUR TRAINING CORPUS
-    sents = gutenberg.sents(['austen-emma.txt', 'austen-sense.txt'])
+    # TODO: Corpus must be larger than 5MB
+    corpora_dir = find(os.path.join(os.getcwd(), 'corpora'))
+    custom_tokenizer = RegexpTokenizer('[^.!?]+')
+    reader = PlaintextCorpusReader(corpora_dir, '.*\.txt', sent_tokenizer=custom_tokenizer)
+    sents = reader.sents('corpus-utf8.txt')
 
     # train the model
     n = int(opts['-n'])
