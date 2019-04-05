@@ -2,6 +2,18 @@
 
 ## Ejercicio 1
 
+El corpus elegido fue una colección de artículos de la Wikipedia en español, tomada en el año 2006. La misma se encuentra disponible [aquí](http://www.cs.upc.edu/~nlp/wikicorpus/raw.es.tgz).
+
+Se utilizó la última porción como corpus para desarrollo (el archivo spanishText_480000_485000) y las primeras 25000 líneas del penúltimo como corpus de test (archivo spanishText_475000_480000)
+
+Para ser utilizado, se aplicaron a ambos algunas transformaciones que consistieron en:
+* Cambiar la codificación de Windos1252 (cp1252) a UTF8
+* Remover las líneas en blanco
+* Remover los tags <doc ...> y </doc> y las líneas que contuvieran _ENDOFARTICLE_ (Los mismos se utilizan para delimitar los artículos)
+* Remover los títulos frecuentes (Enlaces externos, Referencias, Notas, Véase también)
+
+Todo este procesamiento se hace automáticamente corriendo el script ```preprocesing.py```, incluído en _utils_.
+
 ## Ejercicio 2
 
 ## Ejercicio 3 - Generación de Texto
