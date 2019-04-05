@@ -13,7 +13,10 @@ import pickle
 import math
 
 from nltk.corpus import gutenberg
-
+from nltk.corpus.reader import PlaintextCorpusReader
+from nltk.data import find
+from nltk import RegexpTokenizer
+import os
 
 if __name__ == '__main__':
     opts = docopt(__doc__)
@@ -26,13 +29,23 @@ if __name__ == '__main__':
 
     # load the data
     # WORK HERE!! LOAD YOUR EVALUATION CORPUS
-    sents = gutenberg.sents('austen-persuasion.txt')
+    #sents = gutenberg.sents('austen-persuasion.txt')
+    corpora_dir = find(os.path.join(os.getcwd(), 'corpora'))
+    custom_tokenizer = RegexpTokenizer('[^.!?]+')
+    reader = PlaintextCorpusReader(corpora_dir, '.*\.txt', sent_tokenizer=custom_tokenizer)
+    sents = reader.sents('corpus-utf8.txt')
+    
+    # load the model
+    filename = opts['-i']
+    f = open(filename, 'rb')
+    model = pickle.load(f)
+    f.close()
 
     # compute the cross entropy
     # WORK HERE!!
-    log_prob = None
-    e = None
-    p = None
+    log_prob = model.log_prob(sents)
+    e = model.cross_entropy(sents)
+    p = model.perplexity(sents)
 
     print('Log probability: {}'.format(log_prob))
     print('Cross entropy: {}'.format(e))
