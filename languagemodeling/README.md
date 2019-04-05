@@ -37,7 +37,7 @@
 ## Ejercicio 4
 ## Ejercicio 5 - Evaluación
 
-### Resultados para modelos _addone_
+### Resultados para modelos con suavizado _addone_
 
 | N | Log-probability | Cross Entropy | Perplexity |
 |--|--|--|--|
@@ -47,4 +47,14 @@
 | 4 | -15781306.542609232 | 14.536529025616652 | __23764.641630919545__
 
 ## Ejercicio 6
+
+### Resultados para modelos con suavizado por _interpolación_
+
+| N | Log-probability | Cross Entropy | Perplexity |
+|--|--|--|--|
+| 1 | -11950246.677707223 | 11.007650553187245 | __2058.889308053334__
+| 2 | -9301576.083728956 | 8.567898377744331 | __379.48482296831105__
+| 3 | -7969921.99616511 | 7.341280781559397 | __162.1607416068989__
+| 4 | -7272221.741847894 | 6.698612826870174 | __103.86838767673065__
+
 ## Ejercicio 7
