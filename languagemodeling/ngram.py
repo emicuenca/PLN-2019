@@ -274,7 +274,7 @@ class InterpolatedNGram(NGram, SmoothedNGram):
             print('Computing gamma...')
             # use grid search to choose gamma
             values = [1, 10, 100, 1000]
-            best = (-inf, values[0])
+            best = (-math.inf, values[0])
             for value in values:
                 self._gamma = value
                 log_prob = self.log_prob(held_out_sents)
@@ -369,7 +369,7 @@ class BackOffNGram(NGram, SmoothedNGram):
         if beta is None:
             self._beta = 0.5
             values = [0.1, 0.2, 0.3, 0.5, 0.7]
-            best = (-inf, values[0])
+            best = (-math.inf, values[0])
             for value in values:
                 self._beta = value
                 log_prob = self.log_prob(held_out_sents)
