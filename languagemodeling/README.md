@@ -1,10 +1,30 @@
 # Práctico 1 - Modelado de lenguaje
 
-## Ejercicio 1
+## Ejercicio 1 - Corpus
+
+### Descripción
+
+Este ejercicio consistió en elegir un corpus de más de 5 MB, para posteriormente segmentarlo en oraciones y tokenizarlo.
+
+### Sobre el corpus
 
 El corpus elegido fue una colección de artículos de la Wikipedia en español, tomada en el año 2006. La misma se encuentra disponible [aquí](http://www.cs.upc.edu/~nlp/wikicorpus/raw.es.tgz).
 
-Se utilizó la última porción como corpus para desarrollo (el archivo spanishText_480000_485000) y las primeras 25000 líneas del penúltimo como corpus de test (archivo spanishText_475000_480000)
+Se utilizó la última porción como corpus para desarrollo (el archivo spanishText_480000_485000) y las primeras 25000 líneas del penúltimo como corpus de test (archivo spanishText_475000_480000).
+
+Se espera que tanto el corpus de desarrollo como el de test se encuentren en la carpeta corpora, con los nombres corpus.txt y test.txt:
+```
+PLN-2019
+|
++-  languagemodeling
+|
++-  + corpora
+    |
+    +-  corpus.txt
+    |
+    +-  test.txt
+```
+### Preprocesamiento
 
 Para ser utilizado, se aplicaron a ambos algunas transformaciones que consistieron en:
 * Cambiar la codificación de Windos1252 (cp1252) a UTF8
@@ -17,9 +37,30 @@ Todo este procesamiento se hace automáticamente corriendo el script ```preproce
 python languagemodeling/utils/preprocessing.py
 ```
 
-## Ejercicio 2
+## Ejercicio 2 - Modelo de n-gramas
+
+### Descripción
+
+En este ejercicio se completó la clase NGram en el script ```ngram.py``` para poder generar modelos de lenguaje (sin suavizado).
+
+En el método ```__init__``` se contabilizan los n gramas y los n-1 gramas, incluyendo aquellos que comienzan con el signo especial \*.
+
+En los métodos ```sent_prob``` y ```sent_log_prob``` si el acumulador alcanza como valor el elemento absorbente (0 en el primero, -∞ en el segundo) se detiene la iteración y se devuelve ese valor.
 
 ## Ejercicio 3 - Generación de Texto
+
+### Descripción
+
+En este ejercicio se utilizó el corpus elegido anteriormente y el modelo de n-gramas del ejercicio anterior para generar oraciones automáticamente, utilizando el script la clase NGramGenerator en ```ngram_generator.py```.
+
+En el método ```__init__``` se precomputan las probabilidades de los n gramas y se genera un mapeo entre los n-1 gramas (tramo inicial) y los tokens finales y su probabilidad condicional. Dado el ngrama (x_1, ..., x_n-1, x_n):
+```
+{
+  (x_1, ..., x_n-1): {
+    x_n: P(x_n|x_1...x_n-1)
+  }
+}
+```
 
 ### Resultados para n=1
 
@@ -62,7 +103,7 @@ python languagemodeling/utils/preprocessing.py
 |Ellis Tillman Gravett fundó la Chalk Valley Distillery ( Destilería Chalk Valley ) en el cual ni Richard Dean Anderson ( Jack O ' Neill ), ni Michael Shanks ( Daniel Jackson ) aparecen , lo que les hace ideales para combates duros Fred Willard ( nacido el 25 de agosto de 1953 se disputó un partido entre el CD Masnou y una selección de sus artículos periodísticos|
 
 
-## Ejercicio 4
+## Ejercicio 4 - Suavizado _Add One_
 ## Ejercicio 5 - Evaluación
 
 ### Resultados para modelos con suavizado _addone_
