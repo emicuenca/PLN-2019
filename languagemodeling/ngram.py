@@ -72,8 +72,6 @@ class NGram(LanguageModel):
 
         for sent in sents:
             sent = sent + ['</s>']
-            #if 1 < n:
-            #    sent = ['<s>'] + sent
             for i in range(1, n):
                 ngram = tuple(['<s>'] * (n - i) + sent[:i])
                 nminusonegram = ngram[:n - 1]
@@ -273,11 +271,12 @@ class InterpolatedNGram(NGram, SmoothedNGram):
         else:
             print('Computing gamma...')
             # use grid search to choose gamma
-            values = [1, 10, 100, 1000]
+            values = [1, 10, 100, 1000, 10000]
             best = (-math.inf, values[0])
             for value in values:
                 self._gamma = value
                 log_prob = self.log_prob(held_out_sents)
+                print(">>", value, log_prob)
                 best = max(best, (log_prob, value))
             self._gamma = best[1]
             print("Gamma:", self._gamma)
@@ -367,12 +366,13 @@ class BackOffNGram(NGram, SmoothedNGram):
         
         # compute beta if not given
         if beta is None:
-            self._beta = 0.5
+            print('Computing beta...')
             values = [0.1, 0.2, 0.3, 0.5, 0.7]
             best = (-math.inf, values[0])
             for value in values:
                 self._beta = value
                 log_prob = self.log_prob(held_out_sents)
+                print(">>", value, log_prob)
                 best = max(best, (log_prob, value))
             self._beta = best[1]
             print("Beta:", self._beta)
