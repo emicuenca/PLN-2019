@@ -33,7 +33,7 @@ if __name__ == '__main__':
     corpora_dir = find(os.path.join(os.getcwd(), 'corpora'))
     custom_tokenizer = RegexpTokenizer('[^.!?]+')
     reader = PlaintextCorpusReader(corpora_dir, '.*\.txt', sent_tokenizer=custom_tokenizer)
-    sents = reader.sents('corpus-utf8.txt')
+    sents = reader.sents('test-utf8.txt')
     
     # load the model
     filename = opts['-i']
