@@ -1,8 +1,44 @@
 # Práctico 2 - Análisis de sentimiento
 
-## Ejercicio 1
+## Ejercicio 1 - Estadísticas básicas
 
+Para los posibles valores de polaridad en el corpus se registraron estas frecuencias:
 
+### España
+Archivo: intertass-ES-train-tagged.xml
+
+Tweets: 1008
+
+|Tag|Frecuencia|
+|--|--|
+|N|418|
+|P|318|
+|NEU|133|
+|NONE|139|
+
+### Costa Rica
+Archivo: intertass-CR-train-tagged.xml
+
+Tweets: 800
+
+|Tag|Frecuencia|
+|--|--|
+|N|311|
+|P|230|
+|NEU|94|
+|NONE|165|
+
+### Perú
+Archivo: intertass-PE-train-tagged.xml
+
+Tweets: 1000 
+
+|Tag|Frecuencia|
+|--|--|
+|N|242|
+|P|231|
+|NEU|166|
+|NONE|361|
 
 ## Ejercicio 2
 
