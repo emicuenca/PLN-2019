@@ -40,6 +40,8 @@ Tweets: 1000
 |NEU|166|
 |NONE|361|
 
+Las frecuencias fueron obtenidas corriendo ```python scripts/stats.py -f <folder>``` donde 'folder' es la ruta a la carpeta donde está el corpus. Dicho script espera que los nombres de los archivos sean de la forma ```intertass-{location}-train-tagged.xml``` donde 'location' es ES, PE y CR
+
 ## Ejercicio 2
 
 ## Ejercicio 3
