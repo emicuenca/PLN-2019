@@ -68,6 +68,27 @@ En esta función, que recibe como argumento 's', el documento como string, se re
 3. Se eliminan las URLS: ```https?://[^\\s\\<]+```
 4. Se eliminan las menciones a usuarios: ```(?:(?<=\\s|\\>)|(?<=^))@[a-zA-Z0-9_\\-]{,15}\\s?```
 
+### Filtrado de *stopwords*
+
+Las *stopwords* son palabras que se consideran sin carga semántica relevante. NLTK ofrece un conjunto estándar para el español.
+CountVectorizer admite un argumento 'stop_words', una lista de tokens que serán removidas luego de aplicar el tokenizer.
+
+### Manejo de negaciones
+
+Para aplicar esta mejora se modificó el tokenizer para transformar los tokens que sigan a una negación.
+
+Para ello se utilizó una lista de tokens de negación:
+
+```negations = ['no', 'ni', 'nunca', 'jamas', 'pero', 'tampoco']```
+
+La transformación consiste en agregar el prefijo ```NOT_```:
+
+```token =  f'NOT_{token}'```
+
+Esta transformación se aplica a lo sumo a los *n* siguientes tokens de una negación, siempre que no aparezca antes otra negación o un signo de puntuación. Después de probar con distintos valores, el n con mejores resultados fue 3.
+
+Adicionalmente, se debió tener en cuenta remover estas negaciones de la lista de *stopwords*.
+
 ## Ejercicio 3
 
 ## Ejercicio 4
