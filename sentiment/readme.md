@@ -89,7 +89,41 @@ Esta transformación se aplica a lo sumo a los *n* siguientes tokens de una nega
 
 Adicionalmente, se debió tener en cuenta remover estas negaciones de la lista de *stopwords*.
 
-## Ejercicio 3
+## Ejercicio 3 - Exploración de parámetros
+
+Para este ejercicio se creó el script ```grid.py```. Se utilizó a función ```ParameterGrid```de sklearn, que permite generar una matriz con diferentes valores para los hiperparámetros a partir de un diccionario o lista de diccionarios.
+
+Los hiperparámetros a optimizar eran para ambos casos ```C``` y ```penalty```.
+
+Para la regresión lineal (```maxent```) se utilizó:
+
+```
+param_grid = {
+    'clf__C': [1, 10, 100, 1000, 10000, 20000],
+    'clf__penalty': ['l1', 'l2'],
+}
+```
+
+Y para la support vector machine (```svm```):
+
+```
+param_grid = [
+    {
+        'clf__C': [0.25, 0.5, 1, 2, 4, 8, 16, 32],
+        'clf__penalty': ['l2'],
+        'clf__dual': [True, False],
+    },
+    {
+        'clf__C': [0.25, 1, 4, 64, 256, 512, 1024],
+        'clf__dual': [False],
+        'clf__penalty': ['l1'],
+    }
+]
+```
+
+Para comparar las distintas configuraciones se utilizó la *accuracy* y *macro-f1*, que fueron calculadas utilizando la clase Evaluator de ```evaluator.py```.
+
+### Resultados
 
 ## Ejercicio 4
 
