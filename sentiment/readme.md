@@ -125,7 +125,11 @@ Para comparar las distintas configuraciones se utilizó la *accuracy* y *macro-f
 
 ### Resultados
 
-## Ejercicio 4
+## Ejercicio 4 - Inspección de modelos
+
+Para este ejercicio se añadió el script ```features.py```que imprime las 10 features con más peso (a favor y en contra) para cada clase.
+
+### Resultados
 
 ## Ejercicio 5
 
