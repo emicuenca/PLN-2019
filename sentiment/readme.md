@@ -152,6 +152,89 @@ Para este ejercicio se añadió el script ```features.py```que imprime las 10 fe
 
 ### Resultados
 
+#### Negativo
+
+| Token | Peso |
+|--|--|
+| triste | 1.35473692 |
+| ni | 1.00644092 |
+| no | 0.96330167 |
+| odio | 0.91994882 |
+| NOT_es | 0.87096567 |
+| mismo | 0.80579105 |
+| peor | 0.80202346 |
+| feo | 0.7975366 |
+| mal | 0.79494684 |
+| puto | 0.78786867 |
+
+| Token | Peso |
+|--|--|
+| buena | -0.84636696 |
+| genial | -0.79789074 |
+| gracias | -0.78037387 |
+| cierto | -0.76464348 |
+| mejor | -0.7351726 |
+| primer | -0.71996127 |
+| bonito | -0.71661392 |
+| gran | -0.69767941 |
+| día | -0.69186734 |
+| buen | -0.6357978 |
+
+#### Positivo
+
+| Token | Peso |
+|--|--|
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+
+| Token | Peso |
+|--|--|
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+
+#### Neutro
+
+| Token | Peso |
+|--|--|
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+
+| Token | Peso |
+|--|--|
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+
+#### None
+
+| Token | Peso |
+|--|--|
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+
+| Token | Peso |
+|--|--|
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+
+
 ## Ejercicio 5
 
 ## Ejercicio 6
