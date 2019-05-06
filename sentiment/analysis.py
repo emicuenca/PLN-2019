@@ -15,10 +15,10 @@ def print_maxent_features(vect, clf, n=5):
 	for i, label in enumerate(clf.classes_):
 		print('{}:'.format(label))
 		print('\t{} ({})'.format(
-			' '.join([features[j] for j in A[i, :5]]),
+			' '.join([features[j] for j in A[i, :n]]),
 			C[i, A[i, :n]]))
 		print('\t{} ({})'.format(
-			' '.join([features[j] for j in A[i, -5:]]),
+			' '.join([features[j] for j in A[i, -n:]]),
 			C[i, A[i, -n:]]))
 
 
