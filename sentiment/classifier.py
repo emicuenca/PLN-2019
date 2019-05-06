@@ -38,7 +38,7 @@ class NegationTokenizer(object):
                 if len(token) == 1 or token in self.negations:
                     self.remaining = 0
                 else:
-                    token =  "NOT_" + token
+                    token =  f'NOT_{token}'
                     self.remaining -= 1
             elif token in self.negations:
                 self.remaining = self.words_after_negation
