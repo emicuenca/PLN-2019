@@ -129,7 +129,7 @@ Para comparar las distintas configuraciones se utilizó la *accuracy* y *macro-f
 
 | Penalty | C | Accuracy | F1 |
 |--|--|--|--|
-| **l2 | 0.50 | 53.36 | 37.09** |
+| **l2** | **0.50** | **53.36** | **37.09** |
 | l2 | 0.25 | 53.36 | 30.77 |
 | l2 | 1.00 | 52.96 | 38.01 |
 | l2 | 10.00 | 51.98 | 39.31 |
@@ -139,7 +139,7 @@ Para comparar las distintas configuraciones se utilizó la *accuracy* y *macro-f
 
 | Penalty | Dual | C | Accuracy | F1 |
 |--|--|--|--|--|
-| **l2 | True | 0.25 | 51.78 | 38.29** |
+| **l2** | **True** | **0.25** | **51.78** | **38.29** |
 | l2 | True | 0.50 | 51.38 | 39.44 |
 | l1 | False | 256.00 | 50.40 | 37.74 |
 | l2 | True | 1.00 | 50.00 | 38.83 |
