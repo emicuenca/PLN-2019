@@ -152,87 +152,28 @@ Para este ejercicio se añadió el script ```features.py```que imprime las 10 fe
 
 ### Resultados
 
-#### Negativo
-
-| Token | Peso |
-|--|--|
-| triste | 1.35473692 |
-| ni | 1.00644092 |
-| no | 0.96330167 |
-| odio | 0.91994882 |
-| NOT_es | 0.87096567 |
-| mismo | 0.80579105 |
-| peor | 0.80202346 |
-| feo | 0.7975366 |
-| mal | 0.79494684 |
-| puto | 0.78786867 |
-
-| Token | Peso |
-|--|--|
-| buena | -0.84636696 |
-| genial | -0.79789074 |
-| gracias | -0.78037387 |
-| cierto | -0.76464348 |
-| mejor | -0.7351726 |
-| primer | -0.71996127 |
-| bonito | -0.71661392 |
-| gran | -0.69767941 |
-| día | -0.69186734 |
-| buen | -0.6357978 |
-
-#### Positivo
-
-| Token | Peso |
-|--|--|
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-
-| Token | Peso |
-|--|--|
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-
-#### Neutro
-
-| Token | Peso |
-|--|--|
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-
-| Token | Peso |
-|--|--|
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-
-#### None
-
-| Token | Peso |
-|--|--|
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-
-| Token | Peso |
-|--|--|
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
+<div>
+<h4>Negativo</h4>
+<div>
+    <table><thead>		<tr><th>Token</th><th>Peso</th></tr></thead><tbody>		<tr><td>buena</td><td>-0.8464</td></tr><tr><td>genial</td><td>-0.7979</td></tr><tr><td>gracias</td><td>-0.7804</td></tr><tr><td>cierto</td><td>-0.7646</td></tr><tr><td>mejor</td><td>-0.7352</td></tr><tr><td>primer</td><td>-0.7200</td></tr><tr><td>bonito</td><td>-0.7166</td></tr><tr><td>gran</td><td>-0.6977</td></tr><tr><td>día</td><td>-0.6919</td></tr><tr><td>buen</td><td>-0.6358</td></tr></tbody></table>
+    <table><thead>		<tr><th>Token</th><th>Peso</th></tr></thead><tbody>		<tr><td>triste</td><td>1.3547</td></tr><tr><td>ni</td><td>1.0064</td></tr><tr><td>no</td><td>0.9633</td></tr><tr><td>odio</td><td>0.9199</td></tr><tr><td>NOT_es</td><td>0.8710</td></tr><tr><td>mismo</td><td>0.8058</td></tr><tr><td>peor</td><td>0.8020</td></tr><tr><td>feo</td><td>0.7975</td></tr><tr><td>mal</td><td>0.7949</td></tr></tbody></table>
+</div>
+<h4>Positivo</h4>
+<div>
+    <table><thead>		<tr><th>Token</th><th>Peso</th></tr></thead><tbody>		<tr><td>triste</td><td>-0.8859</td></tr><tr><td>no</td><td>-0.7181</td></tr><tr><td>NOT_es</td><td>-0.6779</td></tr><tr><td>ni</td><td>-0.6387</td></tr><tr><td>alguien</td><td>-0.6153</td></tr><tr><td>alguna</td><td>-0.5427</td></tr><tr><td>pues</td><td>-0.5388</td></tr><tr><td>algún</td><td>-0.5210</td></tr><tr><td>odio</td><td>-0.5171</td></tr><tr><td>NOT_en</td><td>-0.4986</td></tr></tbody></table>
+    <table><thead>		<tr><th>Token</th><th>Peso</th></tr></thead><tbody>		<tr><td>buen</td><td>1.2096</td></tr><tr><td>gracias</td><td>1.1832</td></tr><tr><td>guapa</td><td>1.0995</td></tr><tr><td>genial</td><td>1.0733</td></tr><tr><td>buenos</td><td>1.0054</td></tr><tr><td>mejor</td><td>0.8947</td></tr><tr><td>buena</td><td>0.8013</td></tr><tr><td>gusta</td><td>0.7882</td></tr><tr><td>ahí</td><td>0.7867</td></tr></tbody></table>
+</div>
+<h4>Neutro</h4>
+<div>
+    <table><thead>		<tr><th>Token</th><th>Peso</th></tr></thead><tbody>		<tr><td>gracias</td><td>-0.8530</td></tr><tr><td>hoy</td><td>-0.6987</td></tr><tr><td>NOT_es</td><td>-0.6163</td></tr><tr><td>hacer</td><td>-0.5875</td></tr><tr><td>buenos</td><td>-0.4933</td></tr><tr><td>bueno</td><td>-0.4708</td></tr><tr><td>quiero</td><td>-0.4413</td></tr><tr><td>buen</td><td>-0.4361</td></tr><tr><td>mejor</td><td>-0.4338</td></tr><tr><td>NOT_puedo</td><td>-0.4240</td></tr></tbody></table>
+    <table><thead>		<tr><th>Token</th><th>Peso</th></tr></thead><tbody>		<tr><td>NOT_pasa</td><td>0.7630</td></tr><tr><td>pero</td><td>0.6625</td></tr><tr><td>hombre</td><td>0.6391</td></tr><tr><td>felices</td><td>0.6246</td></tr><tr><td>casa</td><td>0.5891</td></tr><tr><td>importante</td><td>0.5808</td></tr><tr><td>unas</td><td>0.5437</td></tr><tr><td>sentimiento</td><td>0.5235</td></tr><tr><td>vez</td><td>0.5083</td></tr></tbody></table>
+</div>
+<h4>NONE</h4>
+<div>
+    <table><thead>		<tr><th>Token</th><th>Peso</th></tr></thead><tbody>		<tr><td>no</td><td>-0.6728</td></tr><tr><td>mal</td><td>-0.6614</td></tr><tr><td>NOT_lo</td><td>-0.6128</td></tr><tr><td>buen</td><td>-0.6065</td></tr><tr><td>vida</td><td>-0.5807</td></tr><tr><td>siempre</td><td>-0.5566</td></tr><tr><td>triste</td><td>-0.5527</td></tr><tr><td>hoy</td><td>-0.4925</td></tr><tr><td>así</td><td>-0.4804</td></tr><tr><td>bueno</td><td>-0.4801</td></tr></tbody></table>
+    <table><thead>		<tr><th>Token</th><th>Peso</th></tr></thead><tbody>		<tr><td>semana</td><td>0.9356</td></tr><tr><td>alguna</td><td>0.7597</td></tr><tr><td>10</td><td>0.6373</td></tr><tr><td>15</td><td>0.6105</td></tr><tr><td>final</td><td>0.5398</td></tr><tr><td>vídeo</td><td>0.5287</td></tr><tr><td>primer</td><td>0.5257</td></tr><tr><td>jugar</td><td>0.5177</td></tr><tr><td>NOT_ahora</td><td>0.5000</td></tr></tbody></table>
+</div>
+</div>
 
 
 ## Ejercicio 5
