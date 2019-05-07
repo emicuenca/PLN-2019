@@ -195,126 +195,126 @@ El criterio elegido para determinar la magnitud del error fue la diferencia entr
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>N</th>
-      <th>NEU</th>
-      <th>NONE</th>
-      <th>P</th>
+      <th>true</th>
+      <th>predicted</th>
       <th>diff</th>
       <th>item</th>
-      <th>predicted</th>
-      <th>true</th>
+      <th>N</th>
+      <th>P</th>
+      <th>NEU</th>
+      <th>NONE</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>184</th>
-      <td>0.800</td>
-      <td>0.068</td>
-      <td>0.057</td>
-      <td>0.075</td>
+      <td>P</td>
+      <td>N</td>
       <td>0.725</td>
       <td>@mariamira67 que nos regales con capturas de imagen de tus actividades ya no es sorpresa. Lo sorprendente es que tienes inivitado!</td>
-      <td>N</td>
-      <td>P</td>
+      <td>0.800</td>
+      <td>0.075</td>
+      <td>0.068</td>
+      <td>0.057</td>
     </tr>
     <tr>
       <th>157</th>
-      <td>0.767</td>
-      <td>0.113</td>
-      <td>0.049</td>
-      <td>0.071</td>
+      <td>NONE</td>
+      <td>N</td>
       <td>0.718</td>
       <td>A mí nunca me podrán hacer una broma porque no cojo llamadas y menos cuando son ocultas</td>
-      <td>N</td>
-      <td>NONE</td>
+      <td>0.767</td>
+      <td>0.071</td>
+      <td>0.113</td>
+      <td>0.049</td>
     </tr>
     <tr>
       <th>232</th>
-      <td>0.789</td>
-      <td>0.073</td>
-      <td>0.060</td>
-      <td>0.079</td>
+      <td>P</td>
+      <td>N</td>
       <td>0.710</td>
       <td>@cakebaess no lo es, tranquila</td>
-      <td>N</td>
-      <td>P</td>
+      <td>0.789</td>
+      <td>0.079</td>
+      <td>0.073</td>
+      <td>0.060</td>
     </tr>
     <tr>
       <th>132</th>
-      <td>0.768</td>
-      <td>0.123</td>
-      <td>0.050</td>
-      <td>0.059</td>
+      <td>P</td>
+      <td>N</td>
       <td>0.708</td>
       <td>@otonashi_saya Pero la verdad es que en general no voy mal de motivación... casi al revés, me sobra motivación (y ego</td>
-      <td>N</td>
-      <td>P</td>
+      <td>0.768</td>
+      <td>0.059</td>
+      <td>0.123</td>
+      <td>0.050</td>
     </tr>
     <tr>
       <th>125</th>
-      <td>0.804</td>
-      <td>0.014</td>
-      <td>0.048</td>
-      <td>0.134</td>
+      <td>P</td>
+      <td>N</td>
       <td>0.671</td>
       <td>De aquí a una semana hará cuatro años que vivo en Barcelona. Creo que por el momento no se me ha dado nada mal</td>
-      <td>N</td>
-      <td>P</td>
+      <td>0.804</td>
+      <td>0.134</td>
+      <td>0.014</td>
+      <td>0.048</td>
     </tr>
     <tr>
       <th>59</th>
-      <td>0.717</td>
-      <td>0.068</td>
-      <td>0.072</td>
-      <td>0.143</td>
+      <td>NEU</td>
+      <td>N</td>
       <td>0.648</td>
       <td>@mividaaburrida @juanpabloraba por dios que guapo sale, que pena que en españa supongo que no saldrá</td>
-      <td>N</td>
-      <td>NEU</td>
+      <td>0.717</td>
+      <td>0.143</td>
+      <td>0.068</td>
+      <td>0.072</td>
     </tr>
     <tr>
       <th>179</th>
-      <td>0.698</td>
-      <td>0.191</td>
-      <td>0.060</td>
-      <td>0.051</td>
+      <td>NONE</td>
+      <td>N</td>
       <td>0.639</td>
       <td>@Serjo77_ ya pero que estoy diciendo que el feminismo no es lo contrario de machismo es el hembrismo q como tu dices, no existe</td>
-      <td>N</td>
-      <td>NONE</td>
+      <td>0.698</td>
+      <td>0.051</td>
+      <td>0.191</td>
+      <td>0.060</td>
     </tr>
     <tr>
       <th>166</th>
-      <td>0.659</td>
-      <td>0.070</td>
-      <td>0.030</td>
-      <td>0.242</td>
+      <td>NONE</td>
+      <td>N</td>
       <td>0.630</td>
       <td>No silencio lo que calla. Es la vida suspendida hasta que brotan las ganas de bailarla. \n\n#creatividad https://t.co/VXMZt8AVyJ</td>
-      <td>N</td>
-      <td>NONE</td>
+      <td>0.659</td>
+      <td>0.242</td>
+      <td>0.070</td>
+      <td>0.030</td>
     </tr>
     <tr>
       <th>81</th>
-      <td>0.689</td>
-      <td>0.106</td>
-      <td>0.071</td>
-      <td>0.134</td>
+      <td>NONE</td>
+      <td>N</td>
       <td>0.619</td>
       <td>@thorelvasco @PabloGenis yo no me tiro pedos soy un princeso</td>
-      <td>N</td>
-      <td>NONE</td>
+      <td>0.689</td>
+      <td>0.134</td>
+      <td>0.106</td>
+      <td>0.071</td>
     </tr>
     <tr>
       <th>201</th>
-      <td>0.710</td>
-      <td>0.102</td>
-      <td>0.095</td>
-      <td>0.093</td>
+      <td>P</td>
+      <td>N</td>
       <td>0.617</td>
       <td>@CucoRguez Ya, estoy jugando al ratón y al gato. No solo voy, me quedo a dormir mañana en vuestro hotel. Quedamos fijo.</td>
-      <td>N</td>
-      <td>P</td>
+      <td>0.710</td>
+      <td>0.093</td>
+      <td>0.102</td>
+      <td>0.095</td>
     </tr>
   </tbody>
 </table>
