@@ -148,7 +148,7 @@ Para comparar las distintas configuraciones se utilizó la *accuracy* y *macro-f
 
 ## Ejercicio 4 - Inspección de modelos
 
-Para este ejercicio se añadió el script ```features.py```que imprime las 10 features con más peso (a favor y en contra) para cada clase.
+Para este ejercicio se añadió el script ```features.py```que imprime las 10 features con más peso (a favor y en contra) para cada clase. También se modificó ``analysis.py```para poder escribir estos valores en un archivo html, y así facilitar su adición a este readme.
 
 ### Resultados
 
@@ -175,6 +175,13 @@ Para este ejercicio se añadió el script ```features.py```que imprime las 10 fe
 </div>
 </div>
 
+### Breve análisis
+
+En general, los features destacados parecen tener sentido, en particular los que favorecen y contradicen las clases Negativo y Positivo.
+
+Para las otras dos clases, varios de los features que las contradicen tienen una polaridad claramente positiva ("buen", "buenos", "mejor", "gracias") o negativa ("no", "mal", "triste").
+
+Una mejora posible sería usar *lemmatizer* o *stemmer* para unificar features como "buen", "bueno", "buenos", "buena", etc. También se podrían introducir mejoras en el tokenizer respecto a features numéricos. En el caso de None se observan dos features favorables, "10" y "15", que podrían agruparse en un token *$NUM$*, por ejemplo.
 
 ## Ejercicio 5
 
